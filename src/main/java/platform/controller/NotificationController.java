@@ -4,6 +4,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +22,8 @@ public class NotificationController {
 	PublisherService PublisherService;
 
     @RequestMapping(value="/notification", method=RequestMethod.POST)
-    public Ping greeting() {
-        PublisherService.send("my msg");
+    public Ping notification(@RequestBody String json) {
+        PublisherService.send(json);
         return new Ping(6,"Received");
     }
 }
